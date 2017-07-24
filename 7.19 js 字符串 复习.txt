@@ -1,0 +1,433 @@
+web的理解？
+连接数据跟后台数据的一个支点
+追求用户体验完美
+  
+html+css
+h5+css3
+canvas
+ajax/jsonp
+localstorage/sessionstorage
+cookie
+正则
+
+
+
+
+echar
+百度地图：地图定位插件 展示地图插件 
+
+
+
+框架：bootstrap node angular
+插件：swiper iscroll tween.js   
+js库：jquery  zepto   
+
+
+
+
+
+7.19：
+
+js:
+一. true/false布尔值boolean：真/假
+    var a=""; 空字符串是假的 非空字符串是真的
+    var a=" ";//真  因为有空格 空格也是字符
+
+    var a=null;//false 假的 空对象
+    var a={};//object 空的对象 真的 true
+    var a=[];//true 数组是对象只是值是空的
+    var a=undefined;//false 
+    var a;//false 因为值是undefined
+
+总结： false/0/null/undefined/空字符串 ---都是假的
+       true/非0数字/非空对象（[],{}）/非空字符串---都是假的
+
+    //==只比较值相等
+    //===除了比较值还要比较数据类型
+
+    //+-*/
+      +有两个功能
+       1.字符串拼接 字符串+1123
+         字符串转数字 b=b+0;//有字符串就拼接了  除了加号别的都可以 %除外
+         
+       2.a=a+"";//数字转字符串
+
+        ==  随性 不判断数据类型
+        === 不随性 判断数据类型
+
+
+
+    b=Number(b); b=parseInt(b);//强制转换
+    //parseFloat  小数  删除后面的非数字部分
+    //parseInt    整数  删除后面的非数字部分
+    //Number      数字 严谨-必须纯数字才能转
+    //a=toString(a); 数字转字符串
+    //隐式转换 加法不行 b=b-0;
+    var a=12;
+    var b="a12";//NaN
+    var b="12a";//12  删除后面的非数字部分
+    b=parseInt(b);
+    alert(b);
+    
+    
+
+    var a=true//真
+    var a=false//假
+    var a=-1//真  非0数字都是真
+    if(a){
+        alert(“真”);
+       }else{
+        alert("假")
+             }
+
+二：return返回值
+    1.函数从一出生就自带return!
+      默认值是undefined
+    
+    2.arguments 实参
+      var a=12;
+      var b=5;
+      var c=666;
+      //...
+      function sum(){
+            var res=0;
+           for(var i=0;i<arguments.length;i++){
+                res+=arguments[i];        
+         }
+            console.log(arguments);
+      }
+
+
+      //调用函数-传参 （不知道有多少参数）
+      alert(sum())
+
+三：事件委托：利用事件冒泡原理，将本身执行的函数交由父元素代替执行
+           好处：1.提高性能
+                 2.可以给未来元素加事件
+                 3.
+       //获取目标元素
+       va oP=ev.srcElement;
+     
+   
+四：jquery:
+    百度还是用的1.几的版本 低版本的 怕不兼容
+
+    原生：window.onload=function(){}//一般得写上
+
+            系统提供的，自己写！
+     1.wondow.onload
+     2.获取元素
+     3.添加事件
+     ------------------------------
+     事件：click()//普通事件
+           bind()//自带绑定unbind
+           on()/off()自带绑定 :$("div").on("click",fn)
+                               $("div").on("click","p",fn)
+
+                                //事件绑定
+                                oBo.addEventListener
+
+
+
+
+
+
+
+
+
+
+           hover()  
+           toggle()    
+
+     选择器：$("#div")
+             $(".div")
+             $(div)
+             $("#div .div div p")
+
+      伪类：$(".box li:first")
+            $(".box li:last")
+            $(".box li:eq(3)")
+            $(".box li:odd")  //odd 奇数
+            $(".box li:even")  //odd 偶数
+            特殊：$(".box li:has(p)")  //选中包含p标签的li选中   
+                  $(".box li:contains(p)")  //选中的里面包含有内容为p的li
+       
+     1. 内容：
+            原生：表单：value
+                  普通：innerHTML
+            jq:   表单：val(字符串)
+                  普通：html(字符串)       
+
+      2.添加class:
+                   原生：
+                         <div id="obj" class="aaa show"></div>
+                         添加  obj.className="show";
+                         删除  obj.className="aaa";
+        
+                   jq:   添加  addClass();
+                         删除  removeClass();
+             
+
+      封装事件
+  
+
+
+
+     .show()显示 .hide()隐藏
+
+     淡入淡出 改变opcity的原理
+
+
+     .fadeIn()  .fadeOut()  渐隐渐变 淡入淡出
+
+     .slideDown()下拉  .slideUp()上拉    有bug：运行几次，非要执行几次
+                                         解决：事件后面加，stop()
+
+
+-------------------------------------------------------
+     原生：添加行间样式
+           obj.style.width="100px";
+
+           obj.style.csstext="width:100px;height:100px;"//设置一组行间样式
+
+
+     jq:   $(obj).css("width","100px");
+     
+           $(obj).css({"width":"100px","height":"100px","background":"red"});//设置一组行间样式
+
+
+******
+    动画：animate  
+        要改变left 先得定位left:0;
+
+        $("#box").animate({"width":"300px","left":"200px"},1000);
+        或： $("#box").animate({"width":"300px","left":"200px"},{duration:9000,complete:function()}{ // 回调函数
+                                                                     $("#box").animate.....                    
+                                                                                             });
+
+     
+       匀速easing  加速  减速 
+        $("#box").animate({"width":"300px","left":"200px"},{duration:9000,easing:easing})
+
+------------------------------------
+jq: 设置内容：  $(obj).html("fasdfssdf或<div></div>标签");
+
+    表单设置内容： $(obj).val("wefasdfsdf");
+
+   
+    获取：1.alert($(obj).html());
+          2.var aaa=$(obj).html();
+            alert(aaa);
+------------------------------------------------------
+$(obj).css(name,value);
+
+$(obj).css({name:value,name1:value1});
+
+
+操作属性三种方法：1.   . //操作的是真正的属性!
+                  2. []  //操作的是变量属性!
+                  3. getAttribute();//操作的是自定义属性！
+
+
+jq:1.获取 $(obj).attr(name)
+    
+   2.设置 $(obj).attr(name,value)
+  
+   3.设置批量 $(obj).attr({name:value,name1:value1...})
+
+   4.删除   $(obj).removeAttr(name)
+
+--------------------------------------------------------------------------
+dom: 原生：创建--document.createElement
+           添加--appendChild/insertBefore
+           删除--removeChild
+
+    jq:
+         var aaa=$("<li>sadfasdf</li>")
+
+         1.div1内部的后边！
+           $("#div1").append($("<h2>sadfasdf</h2>"));或$("<h2>sdfasdf</h2>").appendTo("#div1");
+
+         2.div1内部的前面
+           $("<h2>sdfasdf</h2>").prependTo("#div1");
+
+         3.div1的前面
+           $("<h2>sdfasdf</h2>").insertBefore("#div1");
+0
+     /    4.div1的后面
+ // / 0        $("<h2>sdfasdf</h2>").insertAfter("#div1");
+///
+
+         删除：---$("#div1")remove();
+    ------------------------------------------------------------------------------------------------------------------           
+
+原生js获取事件对象：document.onclick=function(ev){
+                          var oEvent=ev||event;
+                        
+                          alert(oEvent.clientX);
+                         
+
+
+                       }
+
+jq获取事件对象：$(function(){
+
+             $(document).click(function(ev){//直接用ev因为封装好了
+              alert(ev.clientX);
+             })
+             })
+
+
+
+jq阻止冒泡：<div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+
+
+             在执行完事件后边写： 1. ev.stopPropagation();//阻止事件冒泡
+                                  2.return false;也可以阻止冒泡，但是阻止默认事件
+
+
+----------------------------------------------
+jq:       contextmenu鼠标右键点击事件
+      
+        
+阻止默认事件：1.  return false;//阻止默认事件 也可以阻止冒泡
+
+              2. ev.preventDefault();//单纯阻止默认事件
+-----------------------------------------------
+    mouseover  mouseout 鼠标移入移出事件的bug:
+           
+                        解决：替换事件  onmoouseover-------onmouseenter移入  
+                                        onmouseout----------onmouseleave移出
+ 
+
+jq拖拽：物体自身的宽高
+        原生：1.oBox.offsetWidth 获取到的是：1.盒模型的宽高
+                                           2.得到的结果是Number
+
+              2.oBox.style.width行间样式： 获取到的是：字符串 不带边框 内边距。。。1.元素的单纯的宽高
+                                                                                   2.得到的结果是字符串带px
+        jq:  $("#box").width();1.获取到的是单纯的元素宽
+                               2.得到Number类型
+
+             $("#box").outerWidth()----和原生的offsetWidth一样！
+                               1.盒模型的宽高
+                               2.得到Number类型
+
+             $("#box").offset().left---------相当于原生的offsetLeft
+
+-------------------------------------
+            $("div").css("width");//获取自身的宽
+            $("div").offset().left
+;
+            $("div").css("width");
+
+    7.20附加******//获取非行间样式针对火狐谷歌做的 颜色有区别 因为浏览器是按照自己的方式获取的
+            原生：1.var n=getComputedStyle(oDiv,null或false).width//针对火狐谷歌做的
+
+                  2. //IE浏览器不支持获取复合样式 比如border:1px solid red;
+                  var n=oDiv.currentStyle[width];
+                  var n=oDiv.currentStyle["borderWidth"];//单个的
+                  var n=oDiv.currentStyle["borderColor"];//单个的
+--------------------------------------------------------------------------
+******
+       git视频：1.git--分布式代码管理工具 //防止页面冲突
+                 安装包安装 重启电脑  右键
+                  ls------ 查看当前目录文件列表
+                  cd------ 文件夹名称 进入文件夹 Tab键补齐文字
+                  cd..-----返回上一级
+                  cd../../----返回上两级
+                  touch文件----创建文件
+                  编辑文件：1.vi文件名 2.i编辑状态  3.esc推出编辑状态  4.:wq保存并推出
+                  删除文件：rm 1.html
+                  clear  清屏
+
+                 mkdir 文件夹名---新建文件夹
+                 rmdir  文件夹名---------删除文件夹
+
+                 cat    查看文件
+
+
+ 1.git init 改成git文件夹
+ 2. git status 查看git文件夹
+ 3. git add文件名 ---  新建文件夹添加到仓库（缓存区）
+ 4. git commit -m "add a file（提交内容）" ------提交到共享仓库（缓存区）
+ 5.git push  提交到线上
+   线上-----github.com
+
+  注册账号
+  密钥的作用是为了连接
+
+  git clone +..
+
+
+
+
+
+
+--------------------------------------------------
+                  用指令执行操作！
+                  linux系统
+                  
+
+        
+                2.svn--集中式代码管理工具
+
+                
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------
+jq的链式写法：
+
+
+jq的循环：foreach
+
+
+
+判断浏览器信息：----alert(navigator.userAgent); 行业内叫这个:UA
+
+
+  alert($.browser)
+       
+
+
+
+
+****cursor:move;
+
+
+
+
+------------------------------------------------------------
+
+   jq:$(function(){   //用被人写好的函数
+           
+       }) 
+                         
+      div.show()
+----------------------------------------------------
+jq动画有两个默认的运动：1.linear        2.swing
+
+
+
+
+
+
+
+
+
+return返回值
+事件委托
+事件绑定
